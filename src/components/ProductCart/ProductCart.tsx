@@ -31,6 +31,13 @@ export const ProductCart: React.FC<ProductCartProps> = ({
     });
   };
 
+  const handleRemoveFromCart = (productId: number) => {
+    cartDispatch({
+      type: 'REMOVE_ITEM',
+      payload: { id: productId },
+    });
+  };
+
   const isInCart = cartState.items.some(cartItem => cartItem.id === item.id);
 
   const toggleFavorite = () => {
@@ -81,7 +88,9 @@ export const ProductCart: React.FC<ProductCartProps> = ({
               ? `${styles.add} ${styles.button}`
               : `${styles.added} ${styles.button}`
           }
-          onClick={!isInCart ? () => handleAddToCart(item) : undefined}
+          onClick={() =>
+            !isInCart ? handleAddToCart(item) : handleRemoveFromCart(item.id)
+          }
         >
           {!isInCart ? 'Add to cart' : 'Added'}
         </button>
@@ -91,7 +100,7 @@ export const ProductCart: React.FC<ProductCartProps> = ({
           onClick={() => toggleFavorite()}
         >
           <img
-            src={isFavorite ? './icons/heartAdd.png' : './icons/heart.png'}
+            src={isFavorite ? './icons/heartAdd.svg' : './icons/heart.svg'}
             alt="favorite icon"
           />
         </button>

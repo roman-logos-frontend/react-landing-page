@@ -129,7 +129,6 @@
       grid-column: span 4;
       display: grid;
       gap: 24px;
-      justify-content: center;
 
       @include on-desktop {
         grid-column: span 8;
@@ -151,24 +150,36 @@
         }
 
         img {
-          aspect-ratio: 1 / 1;
           height: 100%;
           position: relative;
-          top: 54px;
-          left: 48px;
         }
       }
 
       .phones{
         background: rgba(109, 100, 116, 1);
+
+        img{
+          top: 70px;
+          left: 70px;
+        }
       }
 
       .tablets{
-        background: gray
+        background: gray;
+
+        img{
+          top: 40px;
+          left: 70px;
+        }
       }
 
       .accessories {
-        background: rgba(213, 60, 81, 1)
+        background: rgba(213, 60, 81, 1);
+
+        img{
+          top: 52px;
+          left: 290px;
+        }
       }
 
       &__info{

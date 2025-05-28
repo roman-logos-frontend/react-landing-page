@@ -108,24 +108,30 @@ export const CartPage: React.FC = () => {
             </div>
           ))
         ) : (
-          <p>Your cart is empty</p>
+          <img className={styles.imgEmpty} src="./img/cart-is-empty.png"></img>
         )}
       </div>
 
-      <div className={styles.checkout}>
-        <div className={styles.checkout__info}>
-          <h2>${totalPrice}</h2>
-          <p>Total for {totalQuantity} items</p>
+      {state.items.length > 0 ? (
+        <div className={styles.checkout}>
+          <div className={styles.checkout__info}>
+            <h2>${totalPrice}</h2>
+            <p>Total for {totalQuantity} items</p>
+          </div>
+          <hr />
+          <button
+            className={styles.checkout__button}
+            disabled={state.items.length === 0}
+            onClick={handleCheckout}
+          >
+            Checkout
+          </button>
         </div>
-        <hr />
-        <button
-          className={styles.checkout__button}
-          disabled={state.items.length === 0}
-          onClick={handleCheckout}
-        >
-          Checkout
-        </button>
-      </div>
+      ) : (
+        <NavLink to="/" className={`${styles.checkout} ${styles.navLink}`}>
+          <p>Your cart is empty, go back to shopping</p>
+        </NavLink>
+      )}
     </div>
   );
 };

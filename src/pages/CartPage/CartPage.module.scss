@@ -157,6 +157,10 @@
         }
       }
     }
+
+    .imgEmpty{
+      width: 100%;
+    }
   }
 
   .checkout{
@@ -224,6 +228,19 @@
       &:hover{
         background: inherit;
         border: 1px solid rgba(33, 108, 255, 1);
+        color: black;
+        transition-duration: 0.5s;
+      }
+    }
+  }
+
+  .navLink{
+    text-decoration: none;
+
+    &:hover{
+      border: 1px solid black;
+      transition-duration: 0.5s;
+      p{
         color: black;
         transition-duration: 0.5s;
       }

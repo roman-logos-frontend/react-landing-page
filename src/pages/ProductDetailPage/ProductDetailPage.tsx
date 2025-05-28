@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useParams, useLocation } from 'react-router-dom';
 import styles from './ProductDetailPage.module.scss';
-import { ProductDetails } from '../../types';
+import { Product, ProductDetails } from '../../types';
 import { ProductSlider } from '../../components/ProductSlider';
 import { BreadCrumbs } from '../../components/BreadCrumbs';
 import { VectorBreadCrumbs } from '../../components/VectorBreadCrumbs';
@@ -9,6 +9,7 @@ import { VectorBreadCrumbs } from '../../components/VectorBreadCrumbs';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Swiper as SwiperType } from 'swiper';
 import 'swiper/css';
+import { useCart } from '../../context/CartContext';
 
 export const ProductDetailPage: React.FC = () => {
   const { product, productId } = useParams();
@@ -22,6 +23,59 @@ export const ProductDetailPage: React.FC = () => {
   const [selectedCapacity, setSelectedCapacity] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { state: cartState, dispatch: cartDispatch } = useCart();
+
+  const handleAddToCart = async () => {
+    if (!productDetail) {
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        // eslint-disable-next-line max-len
+        'https://roman-logos-frontend.github.io/react_phone-catalog/api/products.json',
+      );
+      const products: Product[] = await response.json();
+
+      const foundProduct = products.find(pr => pr.itemId === productDetail.id);
+
+      if (foundProduct) {
+        cartDispatch({
+          type: 'ADD_ITEM',
+          payload: {
+            id: foundProduct.id,
+            product: foundProduct,
+            quantity: 1,
+          },
+        });
+      } else {
+        setError('Product not found in products.json');
+      }
+    } catch {
+      setError('Failed to load products.json');
+    }
+  };
+
+  const handleRemoveFromCart = () => {
+    if (!productDetail) {
+      return;
+    }
+
+    const cartItem = cartState.items.find(
+      item => item.product.itemId === productDetail.id,
+    );
+
+    if (cartItem) {
+      cartDispatch({
+        type: 'REMOVE_ITEM',
+        payload: { id: cartItem.id },
+      });
+    }
+  };
+
+  const isInCart = productDetail
+    ? cartState.items.some(item => item.product.itemId === productDetail.id)
+    : false;
 
   const getNewIdColor = (color: string) => {
     if (!productDetail?.id) {
@@ -281,7 +335,18 @@ export const ProductDetailPage: React.FC = () => {
               </span>
             </h2>
 
-            <button className={styles.add}>Add to cart</button>
+            <button
+              className={
+                !isInCart
+                  ? `${styles.add} ${styles.button}`
+                  : `${styles.added} ${styles.button}`
+              }
+              onClick={() =>
+                !isInCart ? handleAddToCart() : handleRemoveFromCart()
+              }
+            >
+              {!isInCart ? 'Add to cart' : 'Added'}
+            </button>
           </div>
 
           <div className={styles.productDescription__bottom}>

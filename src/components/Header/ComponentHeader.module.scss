@@ -128,7 +128,7 @@
         width: 100%;
         background-repeat: no-repeat;
         background-position: center;
-        background-image: url('/icons/menu.png');
+        background-image: url('/icons/menu.svg');
 
         &:hover {
           cursor: pointer;
@@ -209,7 +209,7 @@
           width: 100%;
           background-position: center;
           cursor: pointer;
-          background-image: url('/icons/menu-close.png');
+          background-image: url('/icons/menu-close.svg');
           border-bottom: 3px solid white;
           border-top: 3px solid white;
 
@@ -284,11 +284,11 @@
         }
 
         &__favorite{
-          background-image: url('/icons/heart.png');
+          background-image: url('/icons/heart.svg');
         }
 
         &__cart{
-          background-image: url('/icons/cart.png');
+          background-image: url('/icons/cart.svg');
         }
       }
     }

@@ -14,7 +14,7 @@ export const ComponentFooter = () => {
     <footer>
       <div className={styles.container}>
         <a href="#" className={styles.container__logo}>
-          <img src="./img/Logo.png" alt="NICE GADGETS" />
+          <img src="./img/Nice-Gadgets.svg" alt="NICE GADGETS" />
         </a>
 
         <nav className={styles.nav}>
@@ -57,7 +57,7 @@ export const ComponentFooter = () => {
             Back to top
           </a>
           <button className={styles.button} onClick={scrollToTop}>
-            ^
+            <img src="./icons/Vector.svg"></img>
           </button>
         </div>
       </div>

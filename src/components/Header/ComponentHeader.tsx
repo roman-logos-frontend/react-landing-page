@@ -41,7 +41,7 @@ export const ComponentHeader: React.FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.header__left}>
-        <ComponentLogo imgSrc="./img/Logo.png" />
+        <ComponentLogo imgSrc="./img/Nice-Gadgets.svg" />
 
         <nav className={styles.nav}>
           <ul className={styles.nav__list}>
@@ -81,7 +81,7 @@ export const ComponentHeader: React.FC = () => {
               }
             >
               <div className={styles.icon__wrapper}>
-                <img src="./icons/heart.png" alt="Favorites" />
+                <img src="./icons/heart.svg" alt="Favorites" />
                 {favorites.items.length > 0 && (
                   <span className={`${styles.icon__badge} icon`}>
                     {favorites.items.length}
@@ -97,7 +97,7 @@ export const ComponentHeader: React.FC = () => {
               }
             >
               <div className={styles.icon__wrapper}>
-                <img src="./icons/cart.png" alt="Cart" />
+                <img src="./icons/cart.svg" alt="Cart" />
                 {cart.items.length > 0 && (
                   <span className={`${styles.icon__badge} icon`}>
                     {totalQuantity}
@@ -114,7 +114,7 @@ export const ComponentHeader: React.FC = () => {
       >
         <div className={styles.aside__top}>
           <div className={styles.aside__header}>
-            <ComponentLogo imgSrc="./img/Logo-black.png" />
+            <ComponentLogo imgSrc="./img/Logo-black.svg" />
             <li
               className={styles.icon}
               onClick={toggleMenu}
